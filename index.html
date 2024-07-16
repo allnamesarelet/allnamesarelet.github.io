@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Center Text</title>
+    <title>Centered Form</title>
     <style>
         body, html {
             height: 100%;
@@ -11,11 +11,40 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            background: linear-gradient(to bottom, black, gray);
             font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            width: 100%;
+        }
+        .textbox, .button {
+            display: block;
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            font-size: 24px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .textbox {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .button {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
         }
     </style>
 </head>
 <body>
-    <div>skbidi balsl</div>
+    <div class="container">
+        <input type="text" class="textbox" placeholder="Type something...">
+        <button class="button">Submit</button>
+    </div>
 </body>
 </html>
