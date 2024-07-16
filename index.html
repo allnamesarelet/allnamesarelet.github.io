@@ -76,14 +76,63 @@
     <div class="notification" id="notification">Text copied</div>
 
     <script>
+        const letters = {
+            "A": "Α", "a": "α",
+            "B": "Β", "b": "β",
+            "C": "С", "c": "с",
+            "D": "D", "d": "ԁ",
+            "E": "Ε", "e": "ȩ",
+            "F": "Ғ", "f": "Ғ",
+            "G": "ԍ", "g": "ԍ",
+            "H": "Η", "h": "һ",
+            "I": "I", "i": "i",
+            "J": "Ј", "j": "ј",
+            "K": "Κ", "k": "κ",
+            "L": "L", "l": "ӏ",
+            "M": "Μ", "m": "м",
+            "N": "Ν", "n": "п",
+            "O": "Ο", "o": "ο",
+            "P": "Ρ", "p": "р",
+            "Q": "Ԛ", "q": "ԛ",
+            "R": "Ŗ", "r": "ᴦ",
+            "S": "Ș", "s": "ş",
+            "T": "Τ", "t": "τ",
+            "U": "Џ", "u": "џ",
+            "V": "Ѵ", "v": "ѵ",
+            "W": "Ԝ", "w": "ԝ",
+            "X": "Χ", "x": "x",
+            "Y": "Υ", "y": "ƴ",
+            "Z": "Ζ", "z": "ᴢ"
+        };
+
+        function translate(text) {
+            let translatedString = "";
+            for (let i = 0; i < text.length; i++) {
+                let l = text.charAt(i);
+                if (letters[l]) {
+                    translatedString += letters[l];
+                } else {
+                    translatedString += l;
+                }
+            }
+            return translatedString;
+        }
+
         function copyText() {
             // Get the text from the textbox
             var textBox = document.getElementById("textbox");
-            textBox.select();
-            textBox.setSelectionRange(0, 99999); // For mobile devices
+            var translatedText = translate(textBox.value);
 
-            // Copy the text inside the text field
+            // Create a temporary element to hold the translated text for copying
+            var tempElement = document.createElement("textarea");
+            tempElement.value = translatedText;
+            document.body.appendChild(tempElement);
+            tempElement.select();
+            tempElement.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the temporary element
             document.execCommand("copy");
+            document.body.removeChild(tempElement);
 
             // Show the notification
             var notification = document.getElementById("notification");
