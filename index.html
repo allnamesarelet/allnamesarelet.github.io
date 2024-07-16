@@ -41,17 +41,59 @@
         .button {
             cursor: pointer;
             background-color: rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s, transform 0.1s;
         }
         .button:hover {
             background-color: rgba(0, 0, 0, 0.7);
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 5px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .notification.show {
+            display: block;
+            opacity: 1;
         }
     </style>
 </head>
 <body>
     <div class="title">Roblox Chat Bypasser</div>
     <div class="container">
-        <input type="text" class="textbox" placeholder="Type something...">
-        <button class="button">Submit</button>
+        <input type="text" class="textbox" placeholder="Type something..." id="textbox">
+        <button class="button" onclick="copyText()">Submit</button>
     </div>
+    <div class="notification" id="notification">Text copied</div>
+
+    <script>
+        function copyText() {
+            // Get the text from the textbox
+            var textBox = document.getElementById("textbox");
+            textBox.select();
+            textBox.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the text field
+            document.execCommand("copy");
+
+            // Show the notification
+            var notification = document.getElementById("notification");
+            notification.classList.add("show");
+
+            // Hide the notification after 3 seconds
+            setTimeout(function() {
+                notification.classList.remove("show");
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
