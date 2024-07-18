@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse X Functions Checklist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #6b7b8c, #f8b195);
+            color: #fff;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        label:hover {
+            background: rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.5);
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #444;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+
+        .notification.show {
+            opacity: 1;
+            bottom: 40px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            document.body.appendChild(notification);
+
+            function showNotification(message) {
+                notification.textContent = message;
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            }
+
+            checkboxes.forEach(checkbox => {
+                const isChecked = localStorage.getItem(checkbox.id) === 'true';
+                checkbox.checked = isChecked;
+
+                if (isChecked) {
+                    showNotification(`Loaded: ${checkbox.id}`);
+                }
+
+                checkbox.addEventListener('change', () => {
+                    localStorage.setItem(checkbox.id, checkbox.checked);
+                    showNotification(`${checkbox.checked ? 'Checked' : 'Unchecked'}: ${checkbox.id}`);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Synapse X Functions Checklist</h1>
+    <form>
+        <h2>Envi Helper Function</h2>
+        <label><input type="checkbox" id="getgenv"> getgenv()</label><br>
+        <label><input type="checkbox" id="getrenv"> getrenv()</label><br>
+        <label><input type="checkbox" id="getmenv"> getmenv()</label><br>
+        <label><input type="checkbox" id="getreg"> getreg()</label><br>
+        <label><input type="checkbox" id="getsenv"> getsenv()</label><br>
+        <label><input type="checkbox" id="getfenv"> getfenv()</label><br>
+
+        <h2>Script Envi Function</h2>
+        <label><input type="checkbox" id="loadstring"> loadstring()</label><br>
+        <label><input type="checkbox" id="loadfile"> loadfile()</label><br>
+        <label><input type="checkbox" id="dofile"> dofile()</label><br>
+
+        <h2>Table Modifications Functions</h2>
+        <label><input type="checkbox" id="table.insert"> table.insert()</label><br>
+        <label><input type="checkbox" id="table.remove"> table.remove()</label><br>
+        <label><input type="checkbox" id="table.sort"> table.sort()</label><br>
+        <label><input type="checkbox" id="table.concat"> table.concat()</label><br>
+        <label><input type="checkbox" id="table.pack"> table.pack()</label><br>
+        <label><input type="checkbox" id="table.unpack"> table.unpack()</label><br>
+
+        <h2>Keyboard/Mouse Functions</h2>
+        <label><input type="checkbox" id="isrbxactive"> isrbxactive()</label><br>
+        <label><input type="checkbox" id="mouse1click"> mouse1click()</label><br>
+        <label><input type="checkbox" id="mouse1press"> mouse1press()</label><br>
+        <label><input type="checkbox" id="mouse1release"> mouse1release()</label><br>
+        <label><input type="checkbox" id="mouse2click"> mouse2click()</label><br>
+        <label><input type="checkbox" id="mouse2press"> mouse2press()</label><br>
+        <label><input type="checkbox" id="mouse2release"> mouse2release()</label><br>
+        <label><input type="checkbox" id="keypress"> keypress()</label><br>
+        <label><input type="checkbox" id="keyrelease"> keyrelease()</label><br>
+       
+<label><input type="checkbox" id="keyclick"> keyclick()</label><br>
+
+        <h2>Hook Functions</h2>
+        <label><input type="checkbox" id="hookfunction"> hookfunction()</label><br>
+        <label><input type="checkbox" id="hookmetamethod"> hookmetamethod()</label><br>
+        <label><input type="checkbox" id="newcclosure"> newcclosure()</label><br>
+        <label><input type="checkbox" id="newproxy"> newproxy()</label><br>
+
+        <h2>Reflections Functions</h2>
+        <label><input type="checkbox" id="getcallingscript"> getcallingscript()</label><br>
+        <label><input type="checkbox" id="getscript"> getscript()</label><br>
+        <label><input type="checkbox" id="getinfo"> getinfo()</label><br>
+        <label><input type="checkbox" id="getupvalues"> getupvalues()</label><br>
+        <label><input type="checkbox" id="getconstants"> getconstants()</label><br>
+        <label><input type="checkbox" id="getprotos"> getprotos()</label><br>
+        <label><input type="checkbox" id="getmetatable"> getmetatable()</label><br>
+        <label><input type="checkbox" id="setmetatable"> setmetatable()</label><br>
+
+        <h2>Console Function</h2>
+        <label><input type="checkbox" id="printconsole"> printconsole()</label><br>
+        <label><input type="checkbox" id="rconsoleprint"> rconsoleprint()</label><br>
+        <label><input type="checkbox" id="rconsoleinfo"> rconsoleinfo()</label><br>
+        <label><input type="checkbox" id="rconsolewarn"> rconsolewarn()</label><br>
+        <label><input type="checkbox" id="rconsoleerror"> rconsoleerror()</label><br>
+        <label><input type="checkbox" id="rconsolename"> rconsolename()</label><br>
+        <label><input type="checkbox" id="rconsoleinput"> rconsoleinput()</label><br>
+        <label><input type="checkbox" id="rconsoleclear"> rconsoleclear()</label><br>
+        <label><input type="checkbox" id="rconsoleshow"> rconsoleshow()</label><br>
+        <label><input type="checkbox" id="rconsolehide"> rconsolehide()</label><br>
+
+        <h2>File Functions</h2>
+        <label><input type="checkbox" id="writefile"> writefile()</label><br>
+        <label><input type="checkbox" id="readfile"> readfile()</label><br>
+        <label><input type="checkbox" id="appendfile"> appendfile()</label><br>
+        <label><input type="checkbox" id="delfile"> delfile()</label><br>
+        <label><input type="checkbox" id="listfiles"> listfiles()</label><br>
+
+        <h2>Internal Functions</h2>
+        <label><input type="checkbox" id="newcclosure2"> newcclosure()</label><br>
+        <label><input type="checkbox" id="debug.getupvalue"> debug.getupvalue()</label><br>
+        <label><input type="checkbox" id="debug.setupvalue"> debug.setupvalue()</label><br>
+        <label><input type="checkbox" id="debug.getlocal"> debug.getlocal()</label><br>
+        <label><input type="checkbox" id="debug.setlocal"> debug.setlocal()</label><br>
+        <label><input type="checkbox" id="debug.traceback"> debug.traceback()</label><br>
+        <label><input type="checkbox" id="debug.getinfo"> debug.getinfo()</label><br>
+        <label><input type="checkbox" id="debug.setmetatable"> debug.setmetatable()</label><br>
+
+        <h2>Misc Functions</h2>
+        <label><input type="checkbox" id="getrawmetatable"> getrawmetatable()</label><br>
+        <label><input type="checkbox" id="setreadonly"> setreadonly()</label><br>
+        <label><input type="checkbox" id="isreadonly"> isreadonly()</label><br>
+        <label><input type="checkbox" id="clonefunction"> clonefunction()</label><br>
+        <label><input type="checkbox" id="isluau"> isluau()</label><br>
+        <label><input type="checkbox" id="is_lclosure"> is_lclosure()</label><br>
+        <label><input type="checkbox" id="islclosure"> islclosure()</label><br>
+        <label><input type="checkbox" id="is_synapse_function"> is_synapse_function()</label><br>
+
+        <h2>Drawing Library</h2>
+        <label><input type="checkbox" id="Drawing.new"> Drawing.new()</label><br>
+        <label><input type="checkbox" id="Drawing.remove"> Drawing.remove()</label><br>
+        <label><input type="checkbox" id="Drawing.Clear"> Drawing.Clear()</label><br>
+        <label><input type="checkbox" id="Drawing.SetProperties"> Drawing.SetProperties()</label><br>
+        <label><input type="checkbox" id="Drawing.GetObjects"> Drawing.GetObjects()</label><br>
+
+        <h2>Syn Library</h2>
+        <label><input type="checkbox" id="syn.request"> syn.request()</label><br>
+        <label><input type="checkbox" id="syn.protect_gui"> syn.protect_gui()</label><br>
+        <label><input type="checkbox" id="syn.unprotect_gui"> syn.unprotect_gui()</label><br>
+        <label><input type="checkbox" id="syn.set_thread_identity"> syn.set_thread_identity()</label><br>
+        <label><input type="checkbox" id="syn.get_thread_identity"> syn.get_thread_identity()</label><br>
+        <label><input type="checkbox" id="syn.mouse1click"> syn.mouse1click()</label><br>
+        <label><input type="checkbox" id="syn.mouse1press"> syn.mouse1press()</label><br>
+        <label><input type="checkbox" id="syn.mouse1release"> syn.mouse1release()</label><br>
+        <label><input type="checkbox" id="syn.mouse2click"> syn.mouse2click()</label><br>
+        <label><input type="checkbox" id="syn.mouse2press"> syn.mouse2press()</label><br>
+        <label><input type="checkbox" id="syn.mouse2release"> syn.mouse2release()</label><br>
+        <label><input type="checkbox" id="syn.keypress"> syn.keypress()</label><br>
+        <label><input type="checkbox" id="syn.keyrelease"> syn.keyrelease()</label><br>
+        <label><input type="checkbox" id="syn.keyclick"> syn.keyclick()</label><br>
+        <label><input type="checkbox" id="syn.crypt"> syn.crypt()</label><br>
+
+        <h2>Debug Library</h2>
+        <label><input type="checkbox" id="debug.getupvalue2"> debug.getupvalue()</label><br>
+        <label><input type="checkbox" id="debug.setupvalue2"> debug.setupvalue()</label><br>
+        <label><input type="checkbox" id="debug.getlocal2"> debug.getlocal()</label><br>
+        <label><input type="checkbox" id="debug.setlocal2"> debug.setlocal()</label><br>
+        <label><input type="checkbox" id="debug.traceback2"> debug.traceback()</label><br>
+        <label><input type="checkbox" id="debug.getinfo2"> debug.getinfo()</label><br>
+        <label><input type="checkbox" id="debug.setmetatable2"> debug.setmetatable()</label><br>
+        <label><input type="checkbox" id="debug.getregistry"> debug.getregistry()</label><br>
+        <label><input type="checkbox" id="debug.sethook"> debug.sethook()</label><br>
+        <label><input type="checkbox" id="debug.gethook"> debug.gethook()</label><br>
+
+        <h2>Crypt Library</h2>
+        <label><input type="checkbox" id="syn.crypt.encrypt"> syn.crypt.encrypt()</label><br>
+        <label><input type="checkbox" id="syn.crypt.decrypt"> syn.crypt.decrypt()</label><br>
+        <label><input type="checkbox" id="syn.crypt.hash"> syn.crypt.hash()</label><br>
+        <label><input type="checkbox" id="syn.crypt.hmac"> syn.crypt.hmac()</label><br>
+        <label><input type="checkbox" id="syn.crypt.random"> syn.crypt.random()</label><br>
+        <label><input type="checkbox" id="syn.crypt.randomseed"> syn.crypt.randomseed()</label><br>
+        <label><input type="checkbox" id="syn.crypt.bin2hex"> syn.crypt.bin2hex()</label><br>
+        <label><input type="checkbox" id="syn.crypt.hex2bin"> syn.crypt.hex2bin()</label><br>
+        <label><input type="checkbox" id="syn.crypt.base64_encode"> syn.crypt.base64_encode()</label><br>
+        <label><input type="checkbox" id="syn.crypt.base64_decode"> syn.crypt.base64_decode()</label><br>
+        <label><input type="checkbox" id="syn.crypt.aes_encrypt"> syn.crypt.aes_encrypt()</label><br>
+        <label><input type="checkbox" id="syn.crypt.aes_decrypt"> syn.crypt.aes_decrypt()</label><br>
+        <label><input type="checkbox" id="syn.crypt.sha256"> syn.crypt.sha256()</label><br>
+        <label><input type="checkbox" id="syn.crypt.sha512"> syn.crypt.sha512()</label><br>
+        <label><input type="checkbox" id="syn.crypt.md5"> syn.crypt.md5()</label><br>
+
+        <h2>Bit Library</h2>
+        <label><input type="checkbox" id="bit.bnot"> bit.bnot()</label><br>
+        <label><input type="checkbox" id="bit.band"> bit.band()</label><br>
+        <label><input type="checkbox" id="bit.bor"> bit.bor()</label><br>
+        <label><input type="checkbox" id="bit.bxor"> bit.bxor()</label><br>
+        <label><input type="checkbox" id="bit.lshift"> bit.lshift()</label><br>
+        <label><input type="checkbox" id="bit.rshift"> bit.rshift()</label><br>
+        <label><input type="checkbox" id="bit.arshift"> bit.arshift()</label><br>
+        <label><input type="checkbox" id="bit.bswap"> bit.bswap()</label><br>
+        <label><input type="checkbox" id="bit.tobit"> bit.tobit()</label><br>
+        <label><input type="checkbox" id="bit.tohex"> bit.tohex()</label><br>
+
+        <h2>Websocket Library</h2>
+        <label><input type="checkbox" id="syn.websocket.connect"> syn.websocket.connect()</label><br>
+        <label><input type="checkbox" id="syn.websocket.send"> syn.websocket.send()</label><br>
+        <label><input type="checkbox" id="syn.websocket.receive"> syn.websocket.receive()</label><br>
+        <label><input type="checkbox" id="syn.websocket.close"> syn.websocket.close()</label><br>
+        <label><input type="checkbox" id="syn.websocket.poll"> syn.websocket.poll()</label><br>
+    </form>
+</body>
+</html>
